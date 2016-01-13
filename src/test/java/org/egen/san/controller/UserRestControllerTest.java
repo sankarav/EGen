@@ -5,11 +5,7 @@
  */
 package org.egen.san.controller;
 
-import org.egen.san.config.TestAppConfig;
-import org.egen.san.configuration.DAOConfig;
 import org.egen.san.configuration.EGenConfiguration;
-import org.egen.san.configuration.EmbeddedDBConfig;
-import org.egen.san.configuration.ORMConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

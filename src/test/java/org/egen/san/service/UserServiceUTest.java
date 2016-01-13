@@ -5,41 +5,23 @@
  */
 package org.egen.san.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import java.util.ArrayList;
 import java.util.List;
 import org.egen.san.config.TestAppConfig;
 import org.egen.san.configuration.DAOConfig;
 import org.egen.san.configuration.EmbeddedDBConfig;
 import org.egen.san.configuration.ORMConfig;
-import org.egen.san.controller.UserRestController;
-import org.egen.san.dao.UserDAO;
 import org.egen.san.model.User;
-import org.egen.san.util.MediaUtil;
-import org.hibernate.SessionFactory;
 import org.junit.AfterClass;
-import org.junit.Assert;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import static org.mockito.Mockito.when;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.*;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -47,6 +29,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {EmbeddedDBConfig.class, ORMConfig.class, DAOConfig.class, TestAppConfig.class})
+@Transactional
 public class UserServiceUTest {
     
     @Autowired
@@ -74,15 +57,13 @@ public class UserServiceUTest {
     
     @Test
     public void getAllUsersTest(){
-        List<User> OldUsers = userService.getAllUsers();
-        int countOldUsers = (OldUsers == null) ? 0 : OldUsers.size();
         
         userService.createUser(VALID_USERS.get(0));
         
         List<User> returnedUsers = userService.getAllUsers();
         
         assertNotNull("Retrieved data is null. Expected One", returnedUsers);
-        assertTrue("Expected One User. But size = " + returnedUsers.size(), returnedUsers.size() == (countOldUsers + 1));
+        assertTrue("Expected One User. But size = " + returnedUsers.size(), returnedUsers.size() == 1);
         assertTrue("Retrieved user value is not as Expected", User.isAllValueEquals(VALID_USERS.get(0), returnedUsers.get(0)));
 
     }

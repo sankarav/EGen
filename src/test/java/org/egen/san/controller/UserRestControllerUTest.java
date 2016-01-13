@@ -13,8 +13,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,6 @@ import org.egen.san.model.User;
 import org.egen.san.service.UserService;
 import org.egen.san.util.MediaUtil;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

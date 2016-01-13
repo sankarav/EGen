@@ -5,14 +5,21 @@
  */
 package org.egen.san.platform;
 
-import org.egen.san.BaseTest;
+import org.egen.san.config.TestAppConfig;
+import org.egen.san.configuration.DAOConfig;
+import org.egen.san.configuration.EmbeddedDBConfig;
+import org.egen.san.configuration.ORMConfig;
 import org.egen.san.dao.UserDAO;
 import org.egen.san.model.User;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
@@ -20,7 +27,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * This test class will ensure if Embedded DB is up and running fine
  * @author san
  */
-public class EmbeddedDBTest extends BaseTest{
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {EmbeddedDBConfig.class, ORMConfig.class, DAOConfig.class, TestAppConfig.class})
+@Transactional
+public class EmbeddedDBTest{
     
     @Autowired
     UserDAO userDAO;
