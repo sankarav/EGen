@@ -5,6 +5,11 @@
  */
 package org.egen.san.config;
 
+import org.egen.san.dao.UserDAO;
+import org.egen.san.service.UserService;
+import org.egen.san.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -15,5 +20,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class TestAppConfig {
+    
+    @Autowired
+    @Bean(name = "userService")
+    public UserService getUserService(UserDAO userDAO) {
+        //org.hsqldb.util.DatabaseManager.threadedDBM();
+        return new UserServiceImpl(userDAO);
+    }
     
 }

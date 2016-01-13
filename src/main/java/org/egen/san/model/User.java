@@ -142,7 +142,7 @@ public class User implements Serializable {
         this.zip = _zip;
     }
     
-    public static void copyUserData(User to, User from){
+    public static User copyUserData(User to, User from){
         if(from.getFirstName() != null && !from.getFirstName().isEmpty()){
             to.setFirstName(from.getFirstName());
         }
@@ -170,6 +170,8 @@ public class User implements Serializable {
         if(from.getGender() != null){
             to.setGender(from.getGender());
         }
+        
+        return to;
     }
     
     /**
